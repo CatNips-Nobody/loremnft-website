@@ -4,7 +4,7 @@
 2. build `npm run build`
 3. start `npm start`
 
-### Key Componments
+### Key Components
 
 1. Nodejs + Express
 2. Vuejs
