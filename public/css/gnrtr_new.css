@@ -1,0 +1,505 @@
+@font-face {
+  font-family: 'Gogh Extra Bold';
+  src: url("../font/Gogh Extra Bold.otf") format("opentype"); 
+  }
+
+  html,body{
+    background-color: #141222;
+    color: #ffffff;
+  }
+  
+  * {
+    font-family: "Gogh Extra Bold";
+    box-sizing: border-box;
+    /* border:  solid 1px red; */
+  }
+  .text{
+    font-family: 'Gogh Extra Bold', serif;
+    font-size:22px;
+    color: #DADADA;
+  }
+ 
+  /*---------------------layout-----------------*/
+  
+  .content{
+    display: flex;
+    margin-top: 50px;
+    background-color: #141222;
+  }
+
+
+  .left{
+    display: block;
+    position: fixed;
+    top: 50px;
+    bottom: 10px;
+    padding: 20px 15px;
+    /* padding-bottom: 50px; */
+    width: 17%;
+    /* min-width: 300px; */
+    overflow-y: scroll;
+    max-height: 100%;
+    z-index: 20;
+  }
+
+  .right{
+    width: 83%;
+    margin-left: 17%;
+  }
+
+
+  .black{
+    width: 100%;
+    /* margin-top: 50px; */
+    padding: 50px 0px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .big{
+    background-color: #141222;
+    position: fixed;
+    top:120px;
+    width: 30%;
+    left: 30%;
+    padding: 10px;
+    border-radius: 10px; 
+  }
+
+  .bigbg{
+    background-color: rgb(0,0,0,0.9);
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+  }
+  .big > img {
+    border-radius: 10px; 
+    width: 100%;
+  }
+  .btnopensea{
+    margin-top: 20px;
+  }
+  .btnopensea > a > img{
+    width: 7%;
+  }
+  .iframediv{
+    position: relative;
+  }
+  .iframediv > img{
+    width: 100%;
+  }
+  .iframehtml{
+    /* border-radius: 10px;  */
+    position:absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    /* position: fixed; */
+    /* top:0; */
+    /* left: 0; */
+    /* bottom: 250px; */
+  }
+  /* 
+  .close{
+    text-align: right;
+    position: fixed;
+    top:15px;
+    right: 35px;
+    z-index: 29;
+  }
+*/
+  .bigclose{
+    position:absolute;
+    bottom: 10px;
+    right: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+    color: #DADADA;
+  } 
+  /* .xbtn{
+    opacity: 0;
+  } */
+  .leftblankforclick{
+    opacity: 0;
+    z-index: 20;
+  }
+/* -----------------------scrollbar-------------------------------------------- */
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #141222; 
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #8C14E2; 
+  }
+
+  /* ::-webkit-scrollbar-thumb:hover {
+    background: #8C14E2; 
+  } */
+
+/* -----------------------top-filters--------------------------------------------- */
+.top {
+  position: fixed;
+  top:50px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  background:#141222;
+  color: #DADADA;
+  height: 50px;
+  /* padding: 1em; */
+  z-index: 10;
+  width: 83%;
+}
+.topright{
+  display: flex;
+  align-items: center;
+}
+.totalitems{
+  margin-left: 10px;
+}
+.topsearch{
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.topsearch input{
+  width: 100px;
+  margin:5px 5px;
+  padding:7px 8px;
+  border:1px solid #444;
+  border-radius: 10px;
+  background: #fff;
+  font-family: "Gogh Extra Bold", FontAwesome;
+}
+
+.topsearch input:focus {
+  outline: none;
+}
+
+/*-------------trait-filter---------------------------------------------------*/
+
+  .filter{
+    background-color: #141222;
+    margin: 10px 0px;
+    border-radius:10px;
+    padding: 7px 5px;
+    cursor: pointer;
+
+  }
+  .setting{
+    background-color: #141222;
+    margin: 10px 0px;
+    border-radius:10px;
+    padding: 7px 5px;
+    cursor: pointer;
+
+  }
+
+  .label{
+    padding:0 10px;
+    color:#DADADA;
+    display: inline-block;
+    font-size: 14px;
+    /* transition: 0.5; */
+    position: relative;
+    width: 100%;
+  }
+  .label:hover{
+    color:#ffffff;
+  }
+
+  .resetbtn{
+    float: right;
+    margin-right: 10px;
+    color: #afafaf;
+
+   }
+
+  .subtotal{
+   position:absolute;
+   top: 0;
+   right: 2px;
+   /* float: right; */
+   /* margin-right: 10px; */
+   color: #afafaf;
+   font-size: 14px;
+  }
+
+
+  .inputs{
+    padding: 5px 5px;
+    display: flex;
+  }
+  
+
+  .itemvalue{
+    text-align: left;
+    padding-left: 0px;
+    cursor: pointer;
+    color: #DADADA;
+    font-size: 13px;
+  }
+
+  .labelitem{
+    text-align: left;
+    padding-left: 0px;
+    cursor: pointer;
+    color: #DADADA;
+    font-size: 14px;
+  }
+
+
+  .count{
+    padding-right: 2px;
+    font-size: 12px;
+    color: #999999;
+  }
+  
+  .searchbox{
+     display: flex;
+    width: 80%;
+   }
+  
+  .searchbox input{
+    /* width:10 */
+    
+    width: 95%;
+    margin:5px 5px;
+    padding:7px 8px;
+    border:1px solid #444;
+    border-radius: 12px;
+    background: #fff;
+    font-family: "Gogh Extra Bold",FontAwesome;
+  }
+
+  .searchbox input:focus {
+    outline: none;
+  }
+  .searchicon{
+    padding-top: 3px;
+    padding-left: 6px;
+  }
+
+  .container {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    /* margin-bottom: 12px; */
+    cursor: pointer;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 1px;
+    left: 5px;
+    height: 16px;
+    width: 16px;
+    background-color: #141222;
+  }
+
+
+  .container:hover input ~ .checkmark {
+    background-color: #16F3BC;
+  }
+
+
+  .container input:checked ~ .checkmark {
+    background-color: #141222;
+  }
+
+  .checkmark:after {
+    content: "✨";
+    position: absolute;
+    display: none;
+  }
+
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  .container .checkmark:after {
+    left: -3px;
+    top: -4px;
+  
+  }
+
+  /* ----------------nftcards-------------------- */
+
+  .card{
+
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    background-color: #141222;
+
+    margin: 1%;
+    /* box-shadow: 0px 0px 20px rgba(rgb(112, 46, 46),0.2); */
+    /* transition: all 0.2s ease 0s; */
+    min-width: 290px;
+    width: 18%;
+    /* border-radius:8px; */
+    overflow:hidden;
+    transition: 0s;
+
+  }
+  .card > img{
+    border-radius:10px;
+  }
+
+  /* .card:hover{
+    transform: translate(-2px,-2px);
+    box-shadow: 0px 4px 0px  #8C14E2;
+  } */
+  
+  .btns{
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .dlbtn{
+    padding:3px;
+    background: #8C14E2;
+    border-radius:5px;
+    color: white;
+    cursor: pointer;
+    border: 0;
+    margin: 2px;
+  }
+  
+  .info{
+        padding: 2px
+  }
+
+  .info .tokenid{
+        font-size: 14px;
+  }
+  
+  .category{
+        font-size: 12px;
+  }
+
+  .features{
+        font-size: 12px;
+        color: #8C14E2;
+  }
+  
+
+ .bigtrait{
+  display: none;
+   text-align: left;
+   padding: 0px 18px 12px 18px;
+ }
+
+ .big .tokenid{
+  font-size: 18px;
+ }
+
+ .bigtrait .category{
+  font-size: 16px;
+ }
+ 
+ .bigtrait .features{
+  font-size: 16px;
+  padding-left: 3px;
+ }
+ 
+/* ---------------------------------------- */
+
+
+@media (max-width: 1000px) {
+    
+    
+  .content{
+    flex-direction: column;
+  }
+  .top {
+    width: 100%;
+  }
+
+  .right{
+    width: 100%;
+    margin:0;
+    /* padding: 10px 10px; */
+  }
+  /* .black{
+    padding: 50px 0px;
+  } */
+  
+  .left{
+    display: none;
+    width: 60%;     
+    position: fixed;
+    top:0;
+    bottom: 0;
+    right: 0;
+    padding: 10px 10px;
+    /* overflow-y: hidden; */
+    background-color: #141222;
+  }
+
+  .leftblankforclick{
+    display: none;
+    width: 40%;   
+    height: 100vh;  
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    opacity: 1;
+    background-color: rgb(0, 0, 0, 0);
+  }
+
+  .big{
+    background-color: #141222;
+    position: fixed;
+    top: 113px;
+    width: 80%;
+    left: 10%;
+    bottom: 30px;
+    border-radius: 10px;
+    padding: 0;
+    overflow: scroll;
+  }
+  
+ .bigtrait{
+  display: block;
+
+ }
+
+  .card{
+    min-width: 160px;
+    width: 15%;
+  }
+
+  .btnopensea > a > img{
+    width: 10%;
+  }
+
+}
+
+[v-cloak] {
+  display: none;
+}

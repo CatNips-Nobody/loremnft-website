@@ -1,0 +1,64 @@
+
+/* -----------comic page------------------- */
+
+
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    background-color: #141222;
+    top: 78px;
+}
+
+.page{
+    width: 50%;
+    padding: 10px 20px;
+    /* background-color: #e2e2e2; */
+}
+.page img{
+    width: 100%;
+}
+
+.chapter{
+    position: fixed;
+    width: 100%;
+    top:50px;
+    /* right: 50%; */
+    text-align: center;
+    background-color: #141222;
+    padding-bottom: 13.5px;
+    color: #ffffff;
+}
+
+.smlogo{
+    position: absolute;
+    top: 7%;
+    right: 4%;
+    width: 20px;
+} 
+
+.cmclink{
+   color: #ffffff;
+   display: inline-block;
+   margin: 0px 3px;
+}
+.activelink{
+    cursor: pointer;
+    color: #bbbbbb;
+}
+
+
+
+@media (max-width: 700px) {
+    .page{
+        width: 100%;
+        padding: 10px 20px;
+        /* background-color: #e2e2e2; */
+    }
+    
+
+}
+

@@ -1,0 +1,117 @@
+
+.lorem{
+  margin-top: 50px;
+  position: relative;
+  /* display: flex; */
+  /* height: 800px; */
+  text-align: left;
+  padding-left: 100px;
+  /* background-color: rgb(212, 94, 94); */
+}
+
+.header img{
+  /* height: auto; */
+  width: 50%;
+  /* max-width: 500px; */
+}
+
+.lorem .left{
+  position:absolute;
+  top: 10%;
+  left: 45%;
+  width: 45%;
+  padding-bottom: 200px;
+}
+.lorem .left .text{
+  padding-left: 5%
+}
+.headertext img{
+  width: 110%;
+}
+
+.partnership{
+ display: flex;
+ justify-content: center;
+ padding:15px
+}
+
+.partnership img{
+  width: 50%;
+  max-width: 700px; 
+  /* float: right; */
+  /* display:inline-block; */
+}
+
+.blackspace{
+  height: 700px;
+}
+
+.announce{
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  padding-right: 15px;
+  padding-top: 40px;
+}
+.announce img{
+  padding: 0px 0px 15px 15px;
+  
+  width: 33%;
+  /* display: inline-block; */
+}
+
+.ourvalue{
+  text-align: center;
+}
+.ourvalue img{
+  width: 40%;
+}
+
+@media (max-width: 700px) {
+
+  .lorem {
+    /* width: 100%; */
+    /* padding: 3%; */
+    height: 710px;
+    padding: 0;
+
+  }
+  .lorem img{
+    width: 100%;
+    /* height: %; */
+    /* max-width: 200px; */
+  }
+  .lorem .left{
+    /* float: left; */
+    position:absolute;
+    top: 350px;
+    left: 7%;
+    width: 85%;
+    /* padding: 3%; */
+  }
+  .lorem .left .text{
+    padding-left: 5%;
+  }
+  .partnership{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+   }
+  .partnership img{
+    width: 100%;
+    /* float: none; */
+  }
+  .announce{
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .announce img{
+    width: 100%;
+    /* display: inline-block; */
+  }
+  .ourvalue img{
+    width: 100%;
+  }
+}

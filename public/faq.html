@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LOREM FAQ</title>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/x-icon" href="img/LOREM - Tiny Logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="css/index_final.css">
+    <link rel="stylesheet" href="css/index_faq.css">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YLPEEBLT7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5YLPEEBLT7');
+  </script>
+  </head>
+  <body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <div class="top-nav">
+      <a href="/"><img class = "logo" src="img/LOREM - Tiny Logo.png"></img></a>
+      <input id="menu-toggle" type="checkbox" />
+      <label class='menu-button-container' for="menu-toggle">
+      <div class='menu-button'></div>
+    </label>
+      <ul class="menu">
+
+      <li><a href="/lorem"><span style="color:#16F3BC;">LOREM</span></a></li>
+      <!-- <li><a href="/evt">EVENT</a></li> -->
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/comic">COMIC</a></li>
+      <li><a href="/gallery">GALLERY</a></li>
+      <li><a href="https://twitter.com/LOREMNFT">
+        <i class="fa-brands fa-twitter fa-xl"></i></a></li>
+      <li><a href="https://medium.com/@loremnft">
+        <i class="fa-brands fa-medium fa-xl"></i></a></li>
+      <li><a href="">
+        <i class="fa-brands fa-discord fa-xl"></i></a></li>
+        <li><a href="https://opensea.io/collection/loremnft">
+          <i class="fa-solid fa-sailboat fa-xl"></i></a></li>
+    </ul>
+    </div>
+
+    <div class="ama">
+      <img src="img/Talk to Chronicler.png">
+      <!-- <div class="amatitle head">Ask the Bartender</div> -->
+    </div>
+  <div id="app">
+    <div class="faq">
+        <div class="left">
+        <div class="head">
+         FAQ
+        </div>
+        </br>
+
+        <div class="qna" v-for="qa in qna">
+         <div class="ques" v-on:click="qa.isopen=!qa.isopen">
+          <div class="title"><i class="fa-solid fa-q"></i> : {{qa.question}}</div>
+          <div class="angle-down" v-if="!qa.isopen"><i class="fa-solid fa-angle-down"></i></div>
+          <div class="xmark" v-if="qa.isopen"><i class="fa-solid fa-xmark"></i></div>
+           <div class="ans" v-if="qa.isopen">
+            <div class="text" v-html="qa.answer"></div>
+            <div><a v-show="qa.isreadmore" v-bind:href="qa.readmorelink">More...</a></div>
+           </div>
+         </div>
+        </div>
+        </div>
+
+    </div>
+  </div>
+  <div class="under">©2022 LOREM</div>
+
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+  <script>
+  const qna = [
+    {question:"When is mint?", answer:"Public Mint - 17:00 UTC, 7.13.22</br>AllowList Mint - 15:00 UTC, 7.14.22</br>Remaining Public Mint - 15:00 UTC, 7.15.22", isopen:false, isreadmore:false, readmorelink:""},
+    {question:"What is mint price?", answer:"0 eth", isopen:false, isreadmore:false, readmorelink:""},
+    {question:"Is it free?", answer:"Yes.", isopen:false, isreadmore:false, readmorelink:""},
+    {question:"Are you sure?", answer:"Yes.", isopen:false, isreadmore:false, readmorelink:""},
+    {question:"Has cat nips taken over and is now seeking revenge?", answer:"No, the founders have unanimously agreed without harming each other.", isopen:false, isreadmore:false, readmorelink:""},
+    {question:"Then why?", answer:"With a Bull's Pride and a Bear's Awareness, we want to do our part in the sustainability of a most beloved NFT space--and fucking--HAVE FUN!!!", isopen:false, isreadmore:false, readmorelink:""},
+    {question:"What is so special about the LOREM CC0 Treasury?",answer:"We wish to embrace non-owners as part of our community. There will be 100 pre-reveal NFTs locked into the Treasury forever, and these NFTs will be made CC0. This will enable anyone, holders and non-holders alike, to benefit from the project in creating their own derivatives and projects while retaining full commercial and creative rights. Holders of the remaining non-Treasury NFTs will retain full commercial and creative rights.", isopen:false, isreadmore:true, readmorelink:"https://twitter.com/LOREMNFT/status/1540364300157845504"},
+    {question:"How do I get into Discord?",answer:"Our Discord will remain closed, but will allow new members two different ways, via Resident Nomination as well as an allocation of spots for our exciting new Partnerships.",isopen:false, isreadmore:false, readmorelink:""},
+    {question:"How does the Resident Nomination system work?", answer:"Residents will each gain the opportunity to invite 5 of their trusted friends and associates to join the LOREM world as Initiates. As Initiates, they can explore this world, participate in the shenanigans and enjoy all LOREM has to offer, however they do not automatically have a spot on the AL.",isopen:false,isreadmore:false, readmorelink:""},
+    {question:"How can I earn my spot on the Allowlist?", answer:"Regularly, Residents will nominate Initiates to gain access to a Rystal for AL. Initiates will be nominated based on their quality of engagement, investment in the lore and a genuine connection with the rest of the community. There are no level systems here, so spam messaging will likely not yield the best result. We've been running this for the past month or so.",isopen:false,isreadmore:false, readmorelink:""},
+    {question:"Who are the founders and how did they meet?", answer:"Sina, the soft-spoken creator with a background in contemporary art to fashion to NFTs, shares his heavily-influenced manga/anime style in the upcoming release of LOREM! You may already know him from ImaginarySina’s Imaginary Gang and several Foundation and Rarible pieces.</br></br>Gozuki, the playful, self-proclaimed, 'elderly elder, non-creator',creating sprightly communities and making bright partnerships in web3 comes from years in advertising in brands we all know to the video game industry launching and hosting in world-known Esports!</br></br>Cat Nips, the creator suffering from an array of identity crises, googling how to create smart contracts, comes from a background of being a really good googling person. </br></br>Gozuki found Sina at someone’s recommendation from Discord in an Asian Food channel.</br></br>Cat Nips found Sina from a server without culinary-related channels.", isopen:false, isreadmore:true, readmorelink:"https://twitter.com/i/spaces/1mnxedzypvnJX?s=20"},
+    {question:"What is Lorem?", answer:"LOREM's story involves a world where magic and science are combined, and technology is powered by magic, falling into the sub-genre of magipunk. The collection is built around the division of 3 Reolms in a city name Remopula. Within each Reolm, live 3 tribes of LOREM each.", isopen:false, isreadmore:false, readmorelink:""},
+    {question:"What about Ipsum?", answer:"This is a super exciting new concept we are rolling out post mint!", isopen:false, isreadmore:false, readmorelink:""}
+  ]
+  let vm = new Vue({
+      el: "#app",
+      data: {
+        isansopen:false,
+        qna
+      }
+  })
+
+
+
+  </script>
+</body>
+</html>

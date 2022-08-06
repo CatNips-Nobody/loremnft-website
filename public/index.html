@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LOREM ENTER</title>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/x-icon" href="img/LOREM - Tiny Logo.png">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="css/index_final.css">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YLPEEBLT7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5YLPEEBLT7');
+  </script>
+  </head>
+  <body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <div class="top-nav">
+      <a href="/"><img class = "logo" src="img/LOREM - Tiny Logo.png"></img></a>
+      <input id="menu-toggle" type="checkbox" />
+      <label class='menu-button-container' for="menu-toggle">
+      <div class='menu-button'></div>
+    </label>
+      <ul class="menu">
+
+        <li><a href="/lorem"><span style="color:#16F3BC;">LOREM</span></a></li>
+        <!-- <li><a href="/evt">EVENT</a></li> -->
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/comic">COMIC</a></li>
+        <li><a href="/gallery">GALLERY</a></li>
+        <li><a href="https://twitter.com/LOREMNFT">
+          <i class="fa-brands fa-twitter fa-xl"></i></a></li>
+        <li><a href="https://medium.com/@loremnft">
+          <i class="fa-brands fa-medium fa-xl"></i></a></li>
+        <li><a href="">
+          <i class="fa-brands fa-discord fa-xl"></i></a></li>
+        <li><a href="https://opensea.io/collection/loremnft">
+            <i class="fa-solid fa-sailboat fa-xl"></i></a></li>
+      </ul>
+    </div>
+
+    <div class="tree">
+      <img src="img/LOREM - Reolms.png">
+    </div>
+
+    <div class="parallax_group">
+      <img src="img/reloremsite1/LOREM - Upper bg.png">
+      <div class="quickloadbtn">quick load</div>
+      <div class="parallax_layer" data-speed="0"><img src="img/reloremsite1/LOREM - Upper 10.png"></div>
+      <div class="parallax_layer" data-speed="55"><img src="img/reloremsite1/LOREM - Upper 09.png"></div>
+      <div class="parallax_layer" data-speed="45"><img src="img/reloremsite1/LOREM - Upper 08.png"></div>
+      <div class="parallax_layer" data-speed="30"><img src="img/reloremsite1/LOREM - Upper 07.png"></div>
+      <div class="parallax_layer" data-speed="25"><img src="img/reloremsite1/LOREM - Upper 06.png"></div>
+      <div class="parallax_layer" data-speed="21"><img src="img/reloremsite1/LOREM - Upper 05.png"></div>
+      <div class="parallax_layer" data-speed="19"><img src="img/reloremsite1/LOREM - Upper 04.png"></div>
+      <div class="parallax_layer" data-speed="17"><img src="img/reloremsite1/LOREM - Upper 03.png"></div>
+      <div class="parallax_layer" data-speed="10"><img src="img/reloremsite1/LOREM - Upper 02.png"></div>
+      <div class="parallax_layer" data-speed="0"><img src="img/reloremsite1/LOREM - Upper 01.png"></div> 
+    </div>
+    <div class="blackspace"></div>
+    <div class="enterbtn">
+      <a href='/lorem'><img src="img/Enter.png"></a>
+    </div>
+ 
+
+  <script>
+
+  let layers = document.getElementsByClassName("parallax_layer");
+
+  let sx = 0, // For scroll positions
+      sy = 0;
+  let dx = sx, // For container positions
+      dy = sy;
+  
+   window.addEventListener("scroll", function(event){
+   sx = window.pageXOffset;
+   sy = window.pageYOffset;
+
+  });
+
+  
+  document.querySelector(".quickloadbtn").addEventListener("click", function(e){
+    document.querySelector('.parallax_group').style.display = "none";
+    document.querySelector('.tree').style.display = "block";
+    document.querySelector('.quickloadbtn').style.display = "none";
+  })
+
+ 
+  window.requestAnimationFrame(render);
+
+  function render(){
+    //We calculate our container position by linear interpolation method
+    dx = li(dx,sx,0.03);
+    dy = li(dy,sy,0.03);
+    
+    dx = Math.floor(dx * 100) / 100;
+    dy = Math.floor(dy * 100) / 100;
+
+   let layer, speed, yPos;
+   for (var i = 0; i < layers.length; i++) {
+        layer = layers[i];
+        speed = layer.getAttribute('data-speed');
+        let yPos = (dy * speed / 100);
+        layer.setAttribute('style', 'transform: translate3d(0px, ' + yPos + 'px, 0px)');
+    }
+
+    window.requestAnimationFrame(render);
+  }
+
+  function li(a, b, n) {
+    return (1 - n) * a + n * b;
+  }
+  </script>
+</body>
+</html>

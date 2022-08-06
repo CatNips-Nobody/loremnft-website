@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>LOREM AL</title>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/x-icon" href="img/LOREM - Tiny Logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="css/index_final.css">
+  <link rel="stylesheet" href="css/index_alsearch.css">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YLPEEBLT7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5YLPEEBLT7');
+  </script> -->
+</head>
+
+<body>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <div class="top-nav">
+    <a href="/"><img class="logo" src="img/LOREM - Tiny Logo.png"></img></a>
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+      <div class='menu-button'></div>
+    </label>
+    <ul class="menu">
+
+      <li><a href="/lorem"><span style="color:#16F3BC;">LOREM</span></a></li>
+      <!-- <li><a href="/evt">EVENT</a></li> -->
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/comic">COMIC</a></li>
+      <li><a href="https://twitter.com/LOREMNFT">
+          <i class="fa-brands fa-twitter fa-xl"></i></a></li>
+      <li><a href="https://medium.com/@loremnft">
+          <i class="fa-brands fa-medium fa-xl"></i></a></li>
+      <li><a href="">
+          <i class="fa-brands fa-discord fa-xl"></i></a></li>
+    </ul>
+  </div>
+
+  <div id="app" >
+
+    <div class="alsearch">
+      <div>Allow List</div>
+      <div>Address : <input type="text" v-model="address" placeholder="&#xF002"></div>
+
+      <div class="alresult" v-show="allist.length" v-cloak>
+        <div class="container">
+          <div class="list">
+            <div class="wallet">Wallet</div>
+            <div class="project">Project</div>
+            <div class="number"># of Mint</div>
+          </div>
+          <div class="list" v-for="holder in allist">
+            <div class="wallet">{{ holder.wallet}}</div>
+            <div class="project">{{ holder.project}}</div>
+            <div class="number">{{ holder.number}}</div>
+          </div>
+        
+          <div class="total title"> ✨ Mint(s) allowed {{ total }} ✨ </div>
+        </div>
+      </div>
+      <div class="alresult" v-show="address!='' &&  allist.length==0" v-cloak >Sorry. If you feel there's been an error, please let us know. </div>
+
+    </div>
+  </div>
+  <div class="under">©2022 LOREM</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="../lib/d3.js"></script>
+  <script>
+
+
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        allist: [],
+        total: 0 ,
+        address: ''
+      },
+      watch: {
+        address: function () {
+          //console.log(this.address)
+          this.total = 0
+          getal();
+        }
+      }
+    })
+
+
+    function getal() {
+      
+      if (vm.selectedAccount != "") {
+        axios.post("/al", {
+          address: vm.address
+        }).then(function (res) {
+          if (res.data != 'undefined') {
+            vm.allist = res.data;
+
+            vm.allist.forEach(element => {
+              vm.total += parseInt(element['number'])
+            });
+          }
+        }
+        )
+          .catch(function (err) {
+            console.log(err)
+            vm.error = `${err}`
+          }
+          )
+      }
+
+    }
+
+
+  </script>
+</body>
+
+</html>

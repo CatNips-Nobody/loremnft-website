@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>LOREM</title>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/x-icon" href="img/LOREM - Tiny Logo.png">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="css/index_final.css">
+  <link rel="stylesheet" href="css/mnt.css">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YLPEEBLT7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5YLPEEBLT7');
+  </script> -->
+</head>
+
+<body>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <div class="top-nav">
+    <a href="/"><img class="logo" src="img/LOREM - Tiny Logo.png"></img></a>
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+      <div class='menu-button'></div>
+    </label>
+    <ul class="menu">
+
+      <li><a href="/lorem"><span style="color:#16F3BC;">LOREM</span></a></li>
+      <!-- <li><a href="/evt">EVENT</a></li> -->
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/comic">COMIC</a></li>
+      <li><a href="https://twitter.com/LOREMNFT">
+          <i class="fa-brands fa-twitter fa-xl"></i></a></li>
+      <li><a href="https://medium.com/@loremnft">
+          <i class="fa-brands fa-medium fa-xl"></i></a></li>
+      <li><a href="">
+          <i class="fa-brands fa-discord fa-xl"></i></a></li>
+    </ul>
+  </div>
+
+  <div class="tree">
+    <img src="img/LOREM - Reolms.png">
+  </div>
+
+  <div class="parallax_group">
+    <img src="img/reloremsite1/LOREM - Upper bg.png">
+    <div class="quickloadbtn">quick load</div>
+    <div class="parallax_layer" data-speed="0"><img src="img/reloremsite1/LOREM - Upper 10.png"></div>
+    <div class="parallax_layer" data-speed="55"><img src="img/reloremsite1/LOREM - Upper 09.png"></div>
+    <div class="parallax_layer" data-speed="45"><img src="img/reloremsite1/LOREM - Upper 08.png"></div>
+    <div class="parallax_layer" data-speed="30"><img src="img/reloremsite1/LOREM - Upper 07.png"></div>
+    <div class="parallax_layer" data-speed="25"><img src="img/reloremsite1/LOREM - Upper 06.png"></div>
+    <div class="parallax_layer" data-speed="21"><img src="img/reloremsite1/LOREM - Upper 05.png"></div>
+    <div class="parallax_layer" data-speed="19"><img src="img/reloremsite1/LOREM - Upper 04.png"></div>
+    <div class="parallax_layer" data-speed="17"><img src="img/reloremsite1/LOREM - Upper 03.png"></div>
+    <div class="parallax_layer" data-speed="10"><img src="img/reloremsite1/LOREM - Upper 02.png"></div>
+    <div class="parallax_layer" data-speed="0"><img src="img/reloremsite1/LOREM - Upper 01.png"></div>
+  </div>
+
+  <div id="app">
+    <div class="mintbox" v-show="salesStage==2"  Cv-cloak>
+
+      <div v-show="!mintout">
+      <div class="mintinfo">Public Mint</div>
+      <div class="mintinfo" v-if="minted">{{minted}} Minted</div>
+      <div class="mintnft mintdisable" v-show="!ismintable || alsignature ==''">MINT</div>
+      <div class="mintnft mintenable" v-show="ismintable && alsignature !=''">MINT</div>
+  
+      <!-- <div class="mintqty" v-show="ischangemintqty"> <input type="text" v-model="qty"> </div> -->
+        <div class="connect connectbtn" v-show="!isconnected">CONNECT</div>
+        <div class="mintcaptcha" v-show="isconnected && alsignature =='' && isabletomint">
+          <div>{{ usecaptcha.quiz}}</div>
+          <div class="captchaimg">
+            <img :src="usecaptcha.img">
+            <div class="captchabtn" :style="{top:usecaptcha.top, left:usecaptcha.left}"></div>
+          </div>
+
+        </div>
+        <!-- <div class="disconnect connectbtn " v-show="isconnected">DISCONNECT WALLET</div> -->
+        <div class="connected" v-if="isconnected">
+          <div>✨Wallet Connected✨</div>
+          <div v-show="!ismainnet">Switch Network to Mainnet</div>
+          <div>{{selectedAccountshort}}</div>
+          <div v-show="ismainnet">You have {{alqty-mintedqty}} token(s) to mint</div>
+          <!-- <div>You already minted {{mintedqty}} tokens</div> -->
+          <div v-if="minttxresult">{{minttxresult}}</div>
+        </div>
+      </div>
+      <div v-show="mintout">
+        <div class="mintout"> Public Minted Out </div>
+        <div class="mintinfo"> AL Mint 7/14 15:OO UTC</div> 
+        <div class="mintinfo"> Remainder Mint 7/15 15:OO UTC</div> 
+      </div>
+    </div>
+  </div>
+
+  <div class="blackspace"></div>
+  <div class="enterbtn">
+    <a href='/lorem'><img src="img/Enter.png"></a>
+  </div>
+  <script>
+    let layers = document.getElementsByClassName("parallax_layer");
+
+    let sx = 0, // For scroll positions
+      sy = 0;
+    let dx = sx, // For container positions
+      dy = sy;
+
+    window.addEventListener("scroll", function (event) {
+      sx = window.pageXOffset;
+      sy = window.pageYOffset;
+
+    });
+
+
+    document.querySelector(".quickloadbtn").addEventListener("click", function (e) {
+      document.querySelector('.parallax_group').style.display = "none";
+      document.querySelector('.tree').style.display = "block";
+      document.querySelector('.quickloadbtn').style.display = "none";
+    })
+
+
+    window.requestAnimationFrame(render);
+
+    function render() {
+      //We calculate our container position by linear interpolation method
+      dx = li(dx, sx, 0.03);
+      dy = li(dy, sy, 0.03);
+
+      dx = Math.floor(dx * 100) / 100;
+      dy = Math.floor(dy * 100) / 100;
+
+      let layer, speed, yPos;
+      for (var i = 0; i < layers.length; i++) {
+        layer = layers[i];
+        speed = layer.getAttribute('data-speed');
+        let yPos = (dy * speed / 100);
+        layer.setAttribute('style', 'transform: translate3d(0px, ' + yPos + 'px, 0px)');
+      }
+
+      window.requestAnimationFrame(render);
+    }
+
+    function li(a, b, n) {
+      return (1 - n) * a + n * b;
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+  <!-- <script src = "https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script> -->
+  <script type="text/javascript" src="https://unpkg.com/web3@1.2.11/dist/web3.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/web3modal@1.9.0/dist/index.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script> 
+  <script type="text/javascript"
+    src="https://unpkg.com/@walletconnect/web3-provider@1.2.1/dist/umd/index.min.js"></script>
+  <!-- <script type="text/javascript" src="https://unpkg.com/fortmatic@2.0.6/dist/fortmatic.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+
+    const captcha = [
+      { "quiz": "Click on ✨Sina to Continue", "img": "img/LOREM - captcha1.png", "top": "33%", "left": "33%" },
+      { "quiz": "Click on ✨Sina to Continue", "img": "img/LOREM - captcha2.png", "top": "0", "left": "0" },
+      { "quiz": "Click on ✨Sina to Continue", "img": "img/LOREM - captcha3.png", "top": "33%", "left": "0" }
+    ]
+
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        selectedAccount: '',
+        selectedAccountshort: '',
+        chainName: '',
+        isconnected: false,
+        ismintable: false,
+        isabletomint:false,
+        salesStage:0,
+        ismainnet: false,
+        minted: 0,
+        mintedqty: 0,
+        alsignature: '',
+        alqty: 1,
+        minttxresult: '',
+        usecaptcha: captcha[Math.floor(Math.random() * 3)],
+        mintout:false
+      }
+    //   computed:{
+    //     mintout(){
+    //     return this.minted == 3999;
+    // }
+      //}
+      // created(){
+      //   this.usecaptcha = captcha[ Math.floor(Math.random() * 3)] 
+      // }
+    })
+
+    const Web3Modal = window.Web3Modal.default;
+    const WalletConnectProvider = window.WalletConnectProvider.default;
+
+    let web3Modal;
+    let provider;
+    let lorem;
+    let loremtotal;
+    let contractAddress;
+    let contractABI;
+
+    function init() {
+
+      const providerOptions = {
+        walletconnect: {
+          package: WalletConnectProvider,
+          options: {
+            infuraId: "1b2b5d2a61d940cc95ff28267c558d29",
+          }
+        }
+      };
+
+      web3Modal = new Web3Modal({
+        cacheProvider: false, // optional
+        providerOptions, // required
+        // disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
+        // theme: "lightbox"
+        // theme: "dark"
+        // theme: {
+        //   background: "rgb(39, 49, 56)",
+        //   main: "rgb(199, 199, 199)",
+        //   secondary: "rgb(136, 136, 136)",
+        //   border: "rgba(195, 195, 195, 0.14)",
+        //   hover: "rgb(16, 26, 32)",
+        //   zIndex: 999
+
+        // }
+      });
+      
+      let web3contract = new Web3('https://rinkeby.infura.io/v3/1b2b5d2a61d940cc95ff28267c558d29');
+      contractAddress = '0x8C3900904127B578b571cA05698c80A91Ce94A89';
+      contractABI = [{"inputs":[{"internalType":"uint256","name":"maxBatchSize_","type":"uint256"},{"internalType":"uint256","name":"maxCollectionSize_","type":"uint256"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[],"name":"_adminSigner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"quantity","type":"uint256"},{"internalType":"uint256","name":"allowquantity","type":"uint256"},{"internalType":"bytes","name":"signature","type":"bytes"}],"name":"alMint","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"alMinted","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"quantity","type":"uint256"},{"internalType":"uint256","name":"allowquantity","type":"uint256"},{"internalType":"bytes","name":"signature","type":"bytes"}],"name":"authorizedMint","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"}],"name":"authorizedMinteds","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxPerAddress","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxcollectionSize","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"nextOwnerToExplicitlySet","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"quantity","type":"uint256"}],"name":"publicMint","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"publicMinted","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"quantityForMint","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"quantityReserve","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"salesStage","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"newURI","type":"string"}],"name":"setBaseURI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint8","name":"newmaxPerAddress","type":"uint8"}],"name":"setMaxPerAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"newPrice","type":"uint256"}],"name":"setPrice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"newquantityForMint","type":"uint256"}],"name":"setQuantityForMint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint8","name":"newSalesStage","type":"uint8"}],"name":"setSalesStage","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newSigner","type":"address"}],"name":"setSigner","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address[]","name":"to_","type":"address[]"},{"internalType":"uint256","name":"quantity_","type":"uint256"}],"name":"teamMint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenOfOwnerByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tokenPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"tokensOfOwner","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]
+      loremtotal = new web3contract.eth.Contract(contractABI, contractAddress)
+      // console.log("Web3Modal instance is", web3Modal);
+    }
+
+    async function fetchAccountData() {
+
+      // Get a Web3 instance for the wallet
+      const web3 = new Web3(provider);
+      const chainId = await web3.eth.getChainId();
+
+      if (chainId == '4') {
+        vm.ismainnet = true
+      }
+      // const chainData = evmChains.getChain(chainId);
+      // vm.chainName = chainData.name;
+      const accounts = await web3.eth.getAccounts();
+
+      // let  web3contract = new Web3('https://rinkeby.infura.io/v3/1b2b5d2a61d940cc95ff28267c558d29');
+      lorem = new web3.eth.Contract(contractABI, contractAddress)
+
+      // MetaMask does not give you all accounts, only the selected account
+      // console.log("Got accounts", accounts);
+      vm.selectedAccount = accounts[0];
+      vm.isconnected = true;
+      //vm.isauthmint = true;
+      const shortacc = left(accounts[0], 6) + '...' + right(accounts[0], 4)
+      vm.selectedAccountshort = `Wallet Address :${shortacc}`;
+
+      // checkalremainqty();
+      checkauthremainqty();
+
+    }
+
+
+
+    function right(str, num) {
+      return str.substring(str.length - num, str.length)
+    }
+
+    function left(str, num) {
+      return str.substring(0, num)
+    }
+
+    async function refreshAccountData() {
+      vm.isconnected = false;
+      vm.selectedAccount = null;
+      await fetchAccountData(provider);
+
+    }
+
+    async function onConnect() {
+
+      try {
+        provider = await web3Modal.connect();
+      } catch (e) {
+        console.log("Could not get a wallet connection", e);
+        return;
+      }
+
+      provider.on("accountsChanged", (accounts) => {
+        fetchAccountData();
+      });
+
+      provider.on("chainChanged", (chainId) => {
+        fetchAccountData();
+      });
+
+
+      provider.on("networkChanged", (networkId) => {
+        fetchAccountData();
+      });
+
+      await refreshAccountData();
+    }
+
+    async function onDisconnect() {
+
+      console.log("Killing the wallet connection", provider);
+
+      // TODO: Which providers have close method?
+      if (provider.close) {
+        await provider.close();
+
+        // If the cached provider is not cleared,
+        // WalletConnect will default to the existing session
+        // and does not allow to re-scan the QR code with a new wallet.
+        // Depending on your use case you may want or want not his behavir.
+        await web3Modal.clearCachedProvider();
+        provider = null;
+      }
+
+      vm.selectedAccount = null;
+      vm.isconnected = false;
+
+    }
+
+    function gettotalsupply() {
+
+      loremtotal.methods.totalSupply().call().then(function (result) {
+        vm.minted = result;
+      });
+
+    }
+
+    function getsalesStage() {
+
+    loremtotal.methods.salesStage().call().then(function (result) {
+      vm.salesStage = result;
+    });
+
+    }
+
+    // function checkalremainqty(){
+    //   lorem.methods.alMinted(vm.selectedAccount).call().then(function(result){
+    //     vm.mintedqty = result;
+    //     getalsignature(); 
+    //   })
+    // }
+
+    function checkauthremainqty() {
+      lorem.methods.authorizedMinteds(vm.salesStage, vm.selectedAccount).call().then(function (result) {
+        vm.mintedqty = result;
+        // getsignature(); 
+        if (vm.alqty - vm.mintedqty > 0) {
+          vm.isabletomint = true;
+        } else {
+          vm.isabletomint = false;
+          vm.ismintable = false;
+        }
+
+      })
+    }
+
+    // function almint() {
+    //   // console.log(vm.qty,vm.alqty,vm.alsignature)
+    //   let options = {
+    //     from: vm.selectedAccount,
+    //     value: 0,
+    //   }
+    //   lorem.methods.alMint(vm.qty,vm.alqty,vm.alsignature).send(options, function (error, result) {
+    //     if (error) {
+    //       if (error.message.includes("User denied transaction signature")) {
+    //         vm.minttxresult = "User denied transaction signature";
+    //       }
+    //       else { //$('#claimtxt').text("Please connect your wallet");
+    //       }
+    //     } else {
+    //       vm.minttxresult = "Transaction in progress...please do not refresh or exit =)";
+    //     }
+    //   })
+    //     .on('receipt', function (recipet) {
+    //       vm.minttxresult = "Success! You officially minted (a) LOREM(s)";
+    //       gettotalsupply();
+    //     });
+    // }
+
+
+    function authorizedmint() {
+      // console.log(vm.qty,vm.alqty,vm.alsignature)
+      let options = {
+        from: vm.selectedAccount,
+        value: 0,
+      }
+      lorem.methods.authorizedMint(vm.qty, vm.alqty, vm.alsignature).send(options, function (error, result) {
+        if (error) {
+          if (error.message.includes("User denied transaction signature")) {
+            vm.minttxresult = "User denied transaction signature";
+          }
+          else { //$('#claimtxt').text("Please connect your wallet");
+          }
+        } else {
+          vm.minttxresult = "Transaction in progress...please do not refresh or exit =)";
+        }
+      })
+        .on('receipt', function (recipet) {
+          vm.minttxresult = "Success! You officially minted (a) LORE(M)";
+          gettotalsupply();
+          checkauthremainqty();
+          checkmintable();
+        });
+    }
+
+    // function getalsignature(){
+    //   if(vm.selectedAccount != ""){
+    //     axios.post("/mnt/alsignature", {
+    //       address: vm.selectedAccount
+    //     }).then(function (res) {
+    //       console.log(res.data)
+    //       if(res.data!='undefined'){
+    //       vm.alsignature = res.data['signature'];
+    //       vm.alqty = res.data['amount'];
+
+    //       if(vm.alqty-vm.mintedqty>0){
+    //         vm.ismintable = true;
+    //         vm.ischangemintqty = true;
+    //       }
+    //     }
+    //     }
+    //     )
+    //       .catch(function (err) {
+    //         console.log(err)
+    //         vm.error = `${err}`
+    //       }
+    //       )
+    //     }
+
+    //   }
+    function checkmintable() {
+
+   
+    }
+    function getsignature() {
+      if (vm.selectedAccount != "") {
+        axios.post("/mnt/authsignature", {
+          address: vm.selectedAccount
+        }).then(function (res) {
+          console.log(res.data)
+          vm.alsignature = res.data;
+          vm.alqty = 1;
+          vm.ismintable = true;
+     
+          // if( vm.alqty-vm.mintedqty>0){
+          //   vm.ismintable = true;
+          // }
+          
+        }
+        )
+          .catch(function (err) {
+            console.log(err)
+            vm.error = `${err}`
+          }
+          )
+      }
+
+    }
+
+    window.addEventListener('load', async () => {
+      init();
+      document.querySelector(".connect").addEventListener("click", onConnect);
+      // document.querySelector(".mintnft").addEventListener("click", almint);
+      document.querySelector(".mintenable").addEventListener("click", authorizedmint);
+      document.querySelector(".captchabtn").addEventListener("click", getsignature);
+
+      gettotalsupply();
+      getsalesStage();
+    });
+
+
+  </script>
+</body>
+
+</html>

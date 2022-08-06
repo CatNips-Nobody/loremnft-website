@@ -1,0 +1,49 @@
+.ama{
+    margin-top: 58px;
+    text-align: center;
+}
+.amatitle{
+    margin-top: 10px;
+    text-align: center;
+
+}
+.ama img {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.faq{
+    display: flex;
+    justify-content: center;
+    overflow:hidden;
+    
+  }
+  .faq .left{
+    padding: 0 5%;
+    width: 1200px;
+  }
+
+.ques{
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    position: relative;
+    border: solid 1px #DADADA;
+    border-radius: 8px;
+}
+.angle-down,.xmark{
+    position: absolute;
+    right: 30px;
+    top: 12px
+}
+
+.ans a{
+    color: #BF28F6;
+    text-decoration: none; 
+    font-weight:bold;
+}
+
+.ans a:hover{
+    color: #ffffff;
+    text-decoration: none; 
+  }

@@ -1,0 +1,70 @@
+
+
+input{
+    margin: 5px 5px;
+    padding:7px 8px;
+    border:1px solid #444;
+    border-radius: 12px;
+    background: #fff;
+    font-family: "Gogh Extra Bold", FontAwesome;
+ }
+
+#app{
+    height: 90%;
+}
+
+.alsearch{
+    text-align: center;
+    margin-top: 100px;
+    
+}
+.alresult{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.container{
+    width: 70%;
+    max-width: 1000px;
+}
+.list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 0px;
+ }
+ .wallet{
+    width: 60%;
+ }
+ .project{
+    width: 25%;
+ }
+ .number{
+    width: 15%;
+ }
+
+.total{
+    margin-top: 20px;
+}
+ @media (max-width: 900px) {
+    .container{
+        width: 100%;
+    }
+    .wallet{
+        display: none;
+     }
+     .project{
+        width: 50%;
+     }
+     .number{
+        width: 50%;
+     }
+
+ }
+
+ [v-cloak] {
+    display: none;
+}

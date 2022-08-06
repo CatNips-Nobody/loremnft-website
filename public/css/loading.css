@@ -1,0 +1,18 @@
+.loading {
+  text-align: center;
+  position: absolute;
+  color: #fff;
+  z-index: 9;
+  background: #8C14E2;
+  padding: 8px 18px;
+  border-radius: 5px;
+  left: calc(50% - 45px);
+  top: calc(50% - 18px);
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0
+}

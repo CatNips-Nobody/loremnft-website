@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LOREM COMIC2</title>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/x-icon" href="img/LOREM - Tiny Logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="css/index_final.css">
+    <link rel="stylesheet" href="css/cmc.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YLPEEBLT7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-5YLPEEBLT7');
+    </script>
+  </head>
+  <body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <div class="top-nav">
+      <a href="/"><img class = "logo" src="img/LOREM - Tiny Logo.png"></img></a>
+      <input id="menu-toggle" type="checkbox" />
+      <label class='menu-button-container' for="menu-toggle">
+      <div class='menu-button'></div>
+    </label>
+    <ul class="menu">
+
+      <li><a href="/lorem"><span style="color:#16F3BC;">LOREM</span></a></li>
+      <!-- <li><a href="/evt">EVENT</a></li> -->
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/comic">COMIC</a></li>
+      <li><a href="/gallery">GALLERY</a></li>
+      <li><a href="https://twitter.com/LOREMNFT">
+        <i class="fa-brands fa-twitter fa-xl"></i></a></li>
+      <li><a href="https://medium.com/@loremnft">
+        <i class="fa-brands fa-medium fa-xl"></i></a></li>
+      <li><a href="">
+        <i class="fa-brands fa-discord fa-xl"></i></a></li>
+        <li><a href="https://opensea.io/collection/loremnft">
+          <i class="fa-solid fa-sailboat fa-xl"></i></a></li>
+    </ul>
+    </div>
+ 
+    <div id="app">
+        <div class="main"> 
+          <div class="page" v-for="page in pages"><img :src="page.img"></div>
+        </div>
+        <div class="chapter">
+          LOREM: The Divided &nbsp;&nbsp;
+          <div class = 'cmclink activelink' onclick="location.href='/comic1';"> 1 </div>
+          <div class = 'cmclink' onclick="location.href='/comic2';"> [ 2 ] </div>
+          <div class = 'cmclink activelink' onclick="location.href='/comic3';">  3  </div>
+          <a href="/"><img class="smlogo" src="img/LOREM X.png"></a></img> 
+        </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+
+    <script>
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                pages: []  
+                }
+                
+            })
+            
+            let nextItem = 0
+            function loadMore(){
+         
+            for(let i=0; i<3;i++){
+              meta={}
+
+              let k = nextItem;
+              if(k<28){
+              meta['img'] = `img/comic/Chapter 02/${k}.jpg`
+              vm.pages.push(meta)
+              nextItem++;
+              }
+          }
+        }
+        loadMore();
+        $(window).scroll(function() {
+        if($(window).scrollTop() + $(window).height() + 300 >= $(document).height() ) {
+         
+          loadMore();
+    
+          }
+        });
+
+    
+</script>
+</body>
+</html>

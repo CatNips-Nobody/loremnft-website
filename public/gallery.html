@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>LOREM GALLERY</title>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/x-icon" href="img/LOREM - Tiny Logo.png">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <!-- <link rel="stylesheet" href="css/all.min.css"> -->
+  <link rel="stylesheet" href="css/index_final.css">
+  <link rel="stylesheet" href="css/gnrtr_new.css">
+  <link rel="stylesheet" href="css/loading.css">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YLPEEBLT7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-5YLPEEBLT7');
+    </script>
+    
+</head>
+
+<body>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <div class="top-nav">
+    <a href="/"><img class="logo" src="img/LOREM - Tiny Logo.png"></img></a>
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+      <div class='menu-button'></div>
+    </label>
+    <ul class="menu">
+
+      <li><a href="/lorem"><span style="color:#16F3BC;">LOREM</span></a></li>
+      <!-- <li><a href="/evt">EVENT</a></li> -->
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/comic">COMIC</a></li>
+      <li><a href="/gallery">GALLERY</a></li>
+      <li><a href="https://twitter.com/LOREMNFT">
+          <i class="fa-brands fa-twitter fa-xl"></i></a></li>
+      <li><a href="https://medium.com/@loremnft">
+          <i class="fa-brands fa-medium fa-xl"></i></a></li>
+      <li><a href="">
+          <i class="fa-brands fa-discord fa-xl"></i></a></li>
+      <li><a href="https://opensea.io/collection/loremnft">
+          <i class="fa-solid fa-sailboat fa-xl"></i></a></li>
+    </ul>
+  </div>
+
+
+  <div id="app">
+    <div class="content">
+
+      <div class="leftblankforclick" v-show="ismobilefilter" v-on:click="ismobilefilter=!ismobilefilter"></div>
+
+      <div class="left" v-show="ismobilefilter">
+
+        <!-- <div class="close">
+      <i class="xbtn fa fa-times fa-2x" aria-hidden="true" v-on:click="ismobilefilter=!ismobilefilter"></i>
+      </div> -->
+        <div class="text">Settings</div>
+        <div class="setting">
+          <!-- <div class="label" v-on:click="isdetail=!isdetail">
+            <span v-if="isdetail">✨</span><i class="fa fa-list"></i> Show Details
+          </div> -->
+          <label class="container">
+            <input type="checkbox" :value="true" v-model="isdetail">
+            <span class="checkmark"></span>
+            <div class="labelitem"><i class="fa fa-list"></i> Show Details</div>
+          </label>
+        </div>
+        <div class="setting">
+          <!-- <div class="label" v-on:click="isdownload=!isdownload">
+            <span v-if="isdownload">✨</span><i class="fa fa-download"></i> Download Image
+          </div> -->
+
+          <label class="container">
+            <input type="checkbox" :value="true" v-model="isdownload">
+            <span class="checkmark"></span>
+            <div class="labelitem"></span><i class="fa fa-download"></i> Download Image</div>
+          </label>
+
+        </div>
+        <div class="text">Traits  
+          <div class="resetbtn"><i class="fa fa-repeat" style="color: #16F3BC;"v-on:click="reset"></i></div>
+        </div>
+        
+        <div class="filter" v-for="filter in filters" v-cloak>
+          <div class="label" v-on:click="filter.isopen=!filter.isopen" >
+          <i class="fa " v-bind:class="filter.icon"></i> {{filter.traitname}} 
+          <div class="subtotal">{{filter.traits.length}} 
+            <span v-if="!filter.isopen"><i class="fa-solid fa-angle-down"></i></span>
+            <span v-if="filter.isopen"><i class="fa-solid fa-angle-up"></i></span>
+          </div>
+        </div>
+          <!-- <div class="angle-down" v-if="!filter.isopen"><i class="fa-solid fa-angle-down"></i></div>
+          <div class="xmark" v-if="filter.isopen"><i class="fa-solid fa-xmark"></i></div> -->
+          <!-- </div> -->
+          <div v-show="filter.isopen">
+            <div class="searchbox">
+              <input type="text" v-model="filter.searchtext" placeholder="&#xF002">
+            </div>
+            <div class="inputs" v-for="item in filter.traits"
+              v-if="filter.searchtext ==''||item.VALUE.toUpperCase().indexOf(filter.searchtext.toUpperCase())!=-1">
+              <label class="container">
+                <input type="checkbox" :value="item.VALUE" v-model="filter.traitselected" v-on:input="selected">
+                <span class="checkmark"></span>
+                <div class="itemvalue">{{item.VALUE}}<span class="count"> {{item.COUNT}}</span></div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter">
+          <label class="container">
+            <input type="checkbox" :value="true" v-model="isoneone" v-on:input="selected">
+            <span class="checkmark"></span>
+            <div class="labelitem">1/1 Trait<span class="subtotal"> 12 </span></div>
+          </label>
+
+          <!-- <div class="label" v-on:click="isoneone=!isoneone">
+            <span v-if="isoneone">✨</span><i class="fa fa-list"></i> 1/1 Trait
+          </div>
+          <div class="subtotal">12</div> -->
+        </div>
+      </div>
+    </div>
+      <div class="right">
+
+        <div class='top' v-cloak>
+          <div class="totalitems text">{{tokens.length}} <span class="itemvalue">items</span></div>
+          <div class="topright">
+            <div class="topsearch">
+              <div class="text">#</div>
+              <input type="text" v-model="tokenidstart" placeholder="&#xF002;" v-on:input="selected">
+              -
+              <input type="text" v-model="tokenidend" v-on:input="selected">
+            </div>
+
+            <!-- <div class="toptool"> -->
+            
+            <div class="label filterbtn">
+              <i class="fa fa-sliders fa-lg" aria-hidden="true"></i>
+            </div>
+            <!-- </div> -->
+          </div>
+        </div>
+
+        <div class="black">
+          <transition name="fade">
+            <div class="loading" v-show="loading">
+              <span class="fa fa-spinner fa-spin"></span> Loading
+            </div>
+          </transition>
+          <div class="bigbg" :style="{display:bigdisplay}"></div>
+          <div class="big" :style="{display:bigdisplay}" v-on:click="zoomclose" v-cloak>
+          <div class="bigclose">
+          <i class="fa fa-times fa-2x" aria-hidden="true" v-on:click="zoomclose"></i>
+          </div>
+
+            <div class="iframediv"> 
+              <img src="img/black 900x900.png"></img>
+              <iframe class='iframehtml' :src="bigcard.coverhtml" frameBorder="0"></iframe>
+            </div>
+            <div class="info biginfo">
+              <div class=tokenid>LOREM #{{bigcard.id}}</div>
+              <div class="bigtrait">
+                <div v-for="trait in bigcard.attribute ">
+                  <span class='category'>{{trait.trait_type}} : </span><span
+                    class='features trible'>{{trait.value}}</span>
+                </div>
+              </div>
+
+              <div class="btnopensea"><a class="btnopensealink" :href="'https://opensea.io/assets/ethereum/0x6e3b47a8697bc62be030827f4927a50eb3a93d2a/'+ bigcard.id">
+                <img src="img/Logomark-Blue.svg"></a>
+              </div>
+   
+            </div>
+          </div>
+          
+          <div class="card" v-for="card in cards" v-cloak>
+            <img class="cover" :src="card.cover" v-on:click="zoombig(card)"></img>
+            <div class="info">
+              <div class=tokenid>LOREM #{{card.id}}</div>
+              <div class=trait v-show="isdetail">
+                <div v-for="trait in card.attribute ">
+                  <span class='category'>{{ trait.trait_type}} : </span><span
+                    class='features trible'>{{trait.value}}</span>
+                </div>
+
+              </div>
+              <div class="btns" v-show="isdownload">
+                <button class="dlbtn" v-on:click="download(card.file,'svg')">svg</button>
+                <button class="dlbtn" v-on:click="download(card.file,'mp4')">mp4</button>
+                <button class="dlbtn" v-on:click="download(card.file,'html')">html</button>
+                <button class="dlbtn" v-on:click="download(card.file,'zip')">png</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <!-- <script src = "../lib/infinite-scroll.pkgd.min.js"></script> -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="../lib/d3.js"></script>
+  <script src="../js/generator.bundle.js"> </script>
+  <script>
+
+    document.querySelector('.filterbtn').addEventListener('click', function () {
+      let left = document.querySelector('.left')
+      let leftblankforclick = document.querySelector('.leftblankforclick')
+
+      if (left.style.display === "block") {
+        left.style.display = "none";
+
+      } else {
+        left.style.display = "block";
+      }
+      if (leftblankforclick.style.display === "block") {
+        leftblankforclick.style.display = "none";
+
+      } else {
+        leftblankforclick.style.display = "block";
+      }
+    })
+
+    document.querySelector(".btnopensealink").addEventListener("click", function(e) {
+      e.stopPropagation();
+    });
+    // document.querySelector("button").addEventListener("click", function(e) {
+    //   e.stopPropagation();
+    // });
+    
+    // function resize(){
+    //   windowinnerwidth = window.innerWidth;
+    //   windowinnerHeight = window.innerHeight;
+
+    //   document.querySelector('.biginfo').setAttribute('height', `${windowinnerHeight -110 - windowinnerHeight *0.3}px`)
+    //   // document.querySelector('.iframehtml').setAttribute('height', windowinnerHeight*)
+    //   console.log(`${windowinnerHeight -110 - windowinnerHeight *0.24}px`)
+    // }
+    // resize()
+    // window.addEventListener('resize', resize)
+
+
+
+
+  </script>
+</body>
+
+</html>

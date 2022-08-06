@@ -1,0 +1,32 @@
+{
+  "name": "loremnft-website",
+  "version": "1.0.0",
+  "main": " ./src/server.js",
+  "author": "catnips",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --config ./config/webpack.config.prod.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@azure/storage-blob": "^12.9.0",
+    "@walletconnect/web3-provider": "^1.7.8",
+    "ethereumjs-util": "^7.1.5",
+    "ethers": "^5.6.9",
+    "express": "^4.17.2",
+    "file-saver": "^2.0.5",
+    "fs": "^0.0.1-security",
+    "mssql": "^8.1.2",
+    "web3": "^1.7.3"
+  },
+  "devDependencies": {
+    "adm-zip": "^0.5.9",
+    "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^6.4.0",
+    "html-webpack-plugin": "^5.4.0",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.59.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.3.1"
+  }
+}
